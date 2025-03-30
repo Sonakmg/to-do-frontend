@@ -12,3 +12,5 @@ const PriorityTag = ({ priority }) => {
       </span>
     );
   };
+
+export default PriorityTag;

@@ -1,27 +1,17 @@
-import React from 'react';
-import { useDarkMode } from '../contexts/DarkModeContext';
+import React, { useContext } from 'react';
+import { DarkModeContext } from '../contexts/DarkModeContext';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
 const ThemeToggle = () => {
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
-    <button 
-      className="theme-toggle"
+    <button
       onClick={toggleDarkMode}
-      aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="theme-toggle-btn"
+      aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
     >
-      {darkMode ? (
-        <>
-          <FaSun className="theme-icon" />
-          <span>Light Mode</span>
-        </>
-      ) : (
-        <>
-          <FaMoon className="theme-icon" />
-          <span>Dark Mode</span>
-        </>
-      )}
+      {darkMode ? <FaSun /> : <FaMoon />}
     </button>
   );
 };

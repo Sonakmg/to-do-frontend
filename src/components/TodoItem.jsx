@@ -1,12 +1,12 @@
 // TodoItem.jsx
-import React from 'react';
-import { useDarkMode } from '../contexts/DarkModeContext';
+import React, { useContext } from 'react';
+import { DarkModeContext } from '../contexts/DarkModeContext';
 import StatusBadge from './StatusBadge';
 import PriorityTag from './PriorityTag';
 import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
 
 const TodoItem = ({ todo, onComplete, onEdit, onDelete }) => {
-  const { darkMode } = useDarkMode();
+  const { darkMode } = useContext(DarkModeContext);
 
   return (
     <div className={`todo-card ${darkMode ? 'dark' : 'light'}`}>
