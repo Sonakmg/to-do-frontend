@@ -16,7 +16,12 @@ const urlsToCache = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
+      .then(cache => {
+        return cache.addAll(urlsToCache)
+          .catch(error => {
+            console.error('Error caching resources:', error);
+          });
+      })
   );
 });
 
@@ -27,7 +32,8 @@ self.addEventListener('fetch', event => {
         if (response) {
           return response;
         }
-        return fetch(event.request)
+        const fetchRequest = event.request.clone();
+        return fetch(fetchRequest)
           .then(response => {
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
@@ -35,8 +41,15 @@ self.addEventListener('fetch', event => {
             const responseToCache = response.clone();
             caches.open(CACHE_NAME)
               .then(cache => {
-                cache.put(event.request, responseToCache);
+                cache.put(event.request, responseToCache)
+                  .catch(error => {
+                    console.error('Error caching response:', error);
+                  });
               });
+            return response;
+          })
+          .catch(error => {
+            console.error('Error fetching resource:', error);
             return response;
           });
       })
@@ -45,14 +58,15 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== CACHE_NAME) {
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
   );
 }); 
