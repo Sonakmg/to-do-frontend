@@ -33,7 +33,43 @@ export const TodoProvider = ({ children }) => {
     }
   };
 
-  // ... (other CRUD operations from previous example)
+  const addTodo = async (todoData) => {
+    try {
+      const response = await axios.post(`${API_URL}/todos`, todoData);
+      setTodos(prev => [...prev, response.data]);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data?.error || err.message);
+      throw err;
+    }
+  };
+
+  const updateTodo = async (id, todoData) => {
+    try {
+      const response = await axios.put(`${API_URL}/todos/${id}`, todoData);
+      setTodos(prev => prev.map(todo => 
+        todo.id === id ? response.data : todo
+      ));
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data?.error || err.message);
+      throw err;
+    }
+  };
+
+  const deleteTodo = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/todos/${id}`);
+      setTodos(prev => prev.filter(todo => todo.id !== id));
+    } catch (err) {
+      setError(err.response?.data?.error || err.message);
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, [filters]);
 
   return (
     <TodoContext.Provider value={{
