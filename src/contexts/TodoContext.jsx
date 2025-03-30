@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
@@ -15,7 +15,7 @@ export const TodoProvider = ({ children }) => {
     sort: 'dueDate'
   });
 
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
@@ -31,7 +31,7 @@ export const TodoProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
 
   const addTodo = async (todoData) => {
     try {
@@ -69,7 +69,7 @@ export const TodoProvider = ({ children }) => {
 
   useEffect(() => {
     fetchTodos();
-  }, [filters]);
+  }, [filters, fetchTodos]);
 
   return (
     <TodoContext.Provider value={{
