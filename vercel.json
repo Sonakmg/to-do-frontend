@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/manifest.json",
+      "headers": {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    {
+      "src": "/service-worker.js",
+      "headers": {
+        "Content-Type": "application/javascript",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    {
+      "src": "/icon(.*).png",
+      "headers": {
+        "Content-Type": "image/png",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    {
+      "handle": "filesystem"
+    }
+  ]
+} 
