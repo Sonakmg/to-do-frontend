@@ -17,11 +17,6 @@ const quotes = [
     character: "Naruto Uzumaki"
   },
   {
-    text: "If you don't like your destiny, don't accept it. Instead, have the courage to change it the way you want it to be.",
-    anime: "Naruto",
-    character: "Naruto Uzumaki"
-  },
-  {
     text: "The only way to do great work is to love what you do.",
     anime: "Naruto",
     character: "Naruto Uzumaki"
@@ -33,6 +28,11 @@ const quotes = [
   },
   {
     text: "The moment you think of giving up, think of the reason why you held on so long.",
+    anime: "Naruto",
+    character: "Naruto Uzumaki"
+  },
+  {
+    text: "The only way to do great work is to love what you do.",
     anime: "Naruto",
     character: "Naruto Uzumaki"
   },

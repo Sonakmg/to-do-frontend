@@ -63,6 +63,16 @@ const TodoForm = ({ onSuccess, onCancel }) => {
     };
   }, []);
 
+  const handleCancel = () => {
+    if (formik.dirty) {
+      if (window.confirm('Are you sure you want to cancel? Your changes will be lost.')) {
+        onCancel?.();
+      }
+    } else {
+      onCancel?.();
+    }
+  };
+
   return (
     <div className="todo-form-overlay">
       <div className={`todo-form-container ${showSuccess ? 'success' : ''}`}>
@@ -85,7 +95,7 @@ const TodoForm = ({ onSuccess, onCancel }) => {
               <h2>Create New Task</h2>
               <button 
                 className="close-button"
-                onClick={onCancel}
+                onClick={handleCancel}
                 aria-label="Close form"
               >
                 <FaTimes />
@@ -190,7 +200,7 @@ const TodoForm = ({ onSuccess, onCancel }) => {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={onCancel}
+                  onClick={handleCancel}
                 >
                   Cancel
                 </button>

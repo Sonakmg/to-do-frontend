@@ -1,37 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { TodoProvider } from './contexts/TodoContext';
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { DarkModeProvider } from './contexts/DarkModeContext';
+import { TodoProvider } from './contexts/TodoContext';
 import TodoList from './components/TodoList';
-import TodoDetails from './components/TodoDetails';
+import TodoForm from './components/TodoForm';
+import Logo from './components/Logo';
 import ThemeToggle from './components/ThemeToggle';
 import './styles/main.css';
-import './styles/theme.css';
 
 function App() {
+  useEffect(() => {
+    document.documentElement.dataset.hydrated = 'true';
+  }, []);
+
   return (
     <DarkModeProvider>
       <TodoProvider>
-        <Router>
-          <div className="app-container">
-            <header className="app-header">
-              <div className="header-content">
-                <h1>Productivity Pro</h1>
-                <p>Your professional task management system</p>
-              </div>
+        <div className="app">
+          <header className="header">
+            <div className="header-content">
+              <Logo />
               <ThemeToggle />
-            </header>
-            <main className="app-content">
-              <Routes>
-                <Route path="/" element={<TodoList />} />
-                <Route path="/todos/:id" element={<TodoDetails />} />
-              </Routes>
-            </main>
-            <footer className="app-footer">
-              <p>© {new Date().getFullYear()} Productivity Pro</p>
-            </footer>
-          </div>
-        </Router>
+            </div>
+          </header>
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<TodoList />} />
+              <Route path="/new" element={<TodoForm />} />
+            </Routes>
+          </main>
+        </div>
       </TodoProvider>
     </DarkModeProvider>
   );
