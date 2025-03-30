@@ -1,36 +1,49 @@
-import React, { useContext } from 'react';
-import { TodoContext } from '../contexts/TodoContext';
+// TodoItem.jsx
+import React from 'react';
+import { useDarkMode } from '../contexts/DarkModeContext';
 import StatusBadge from './StatusBadge';
-import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import PriorityTag from './PriorityTag';
+import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
 
-const TodoItem = ({ todo, onView }) => {
-  const { updateTodo, deleteTodo } = useContext(TodoContext);
-
-  const handleStatusChange = async (newStatus) => {
-    try {
-      await updateTodo(todo.id, { status: newStatus });
-    } catch (error) {
-      console.error('Error updating todo:', error);
-    }
-  };
+const TodoItem = ({ todo, onComplete, onEdit, onDelete }) => {
+  const { darkMode } = useDarkMode();
 
   return (
-    <div className={`todo-item ${todo.status}`}>
-      <div className="todo-content">
-        <h3>{todo.title}</h3>
-        <p>{todo.description}</p>
+    <div className={`todo-card ${darkMode ? 'dark' : 'light'}`}>
+      <div className="todo-header">
+        <h3 className="todo-title">{todo.title}</h3>
         <div className="todo-meta">
           <StatusBadge status={todo.status} />
-          <span>Priority: {todo.priority}</span>
-          {todo.dueDate && <span>Due: {new Date(todo.dueDate).toLocaleDateString()}</span>}
+          <PriorityTag priority={todo.priority} />
         </div>
       </div>
-      <div className="todo-actions">
-        <button onClick={() => handleStatusChange('completed')}>
-          Complete
-        </button>
-        <button onClick={onView}><FaEye /></button>
-        <button onClick={() => deleteTodo(todo.id)}><FaTrash /></button>
+      
+      <p className="todo-description">{todo.description}</p>
+      
+      <div className="todo-footer">
+        <div className="todo-due-date">
+          <span>Due: {new Date(todo.dueDate).toLocaleDateString()}</span>
+        </div>
+        <div className="todo-actions">
+          <button 
+            className="action-btn complete-btn"
+            onClick={() => onComplete(todo.id)}
+          >
+            <FaCheck />
+          </button>
+          <button 
+            className="action-btn edit-btn"
+            onClick={() => onEdit(todo)}
+          >
+            <FaEdit />
+          </button>
+          <button 
+            className="action-btn delete-btn"
+            onClick={() => onDelete(todo.id)}
+          >
+            <FaTrash />
+          </button>
+        </div>
       </div>
     </div>
   );

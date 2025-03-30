@@ -68,3 +68,99 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+
+  /* styles/main.css */
+.todo-card {
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .todo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .todo-card.light {
+    background-color: white;
+    border: 1px solid #eaeaea;
+  }
+  
+  .todo-card.dark {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+  }
+  
+  .todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  
+  .todo-title {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+  
+  .todo-description {
+    margin: 0.8rem 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .todo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .todo-due-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .todo-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .action-btn {
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .complete-btn {
+    color: #38a169;
+  }
+  
+  .complete-btn:hover {
+    background-color: rgba(56, 161, 105, 0.1);
+  }
+  
+  .edit-btn {
+    color: #3182ce;
+  }
+  
+  .edit-btn:hover {
+    background-color: rgba(49, 130, 206, 0.1);
+  }
+  
+  .delete-btn {
+    color: #e53e3e;
+  }
+  
+  .delete-btn:hover {
+    background-color: rgba(229, 62, 62, 0.1);
+  }
