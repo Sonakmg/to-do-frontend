@@ -1,3 +1,8 @@
+/* Add this at the top of your CSS file */
+:root:not([data-hydrated="true"]) * {
+  visibility: hidden;
+}
+
 /* Filter Bar Styles */
 .filter-bar {
     display: flex;
