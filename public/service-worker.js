@@ -1,13 +1,13 @@
 const CACHE_NAME = 'productivity-pro-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon16.png',
-  '/icon32.png',
-  '/icon64.png',
-  '/icon192.png',
-  '/icon512.png'
+  '.',
+  'index.html',
+  'manifest.json',
+  'icon16.png',
+  'icon32.png',
+  'icon64.png',
+  'icon192.png',
+  'icon512.png'
 ];
 
 self.addEventListener('install', event => {
