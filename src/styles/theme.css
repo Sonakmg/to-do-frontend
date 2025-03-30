@@ -1,0 +1,84 @@
+/* Dark Mode Variables */
+.dark-mode {
+    --primary-color: #3a86ff;
+    --secondary-color: #8338ec;
+    --accent-color: #ff006e;
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-color: #333333;
+  }
+  
+  /* Light Mode Variables */
+  :root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4895ef;
+    --background-color: #ffffff;
+    --surface-color: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --border-color: #dee2e6;
+  }
+  
+  /* Apply color variables */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .app-container {
+    background-color: var(--background-color);
+  }
+  
+  .app-header, .app-footer {
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+  }
+  
+  /* Theme Toggle Button */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .theme-toggle:hover {
+    background: var(--accent-color);
+    color: white;
+  }
+  
+  .theme-icon {
+    font-size: 1rem;
+  }
+
+  /* Dark Mode Classes */
+.dark-mode {
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-color: #333333;
+  }
+  
+  /* Component-specific dark mode styles */
+  .example-component.dark {
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+  }
+  
+  .example-component.light {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+  }
