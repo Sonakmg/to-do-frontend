@@ -2,26 +2,80 @@
 .filter-bar {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.5rem;
     padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
   }
   
   .filter-group {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
   
   .filter-group label {
-    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
     font-weight: 500;
+    color: var(--text-secondary);
   }
   
   .filter-group select {
     padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    min-width: 120px;
+  }
+  
+  .filter-group select:hover {
+    border-color: var(--primary-color);
+  }
+  
+  .filter-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color-light);
+  }
+  
+  /* Dark mode styles */
+  .dark .filter-bar {
+    background-color: var(--bg-secondary-dark);
+  }
+  
+  .dark .filter-group select {
+    background-color: var(--bg-primary-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-primary-dark);
+  }
+  
+  .dark .filter-group select:hover {
+    border-color: var(--primary-color-dark);
+  }
+  
+  .dark .filter-group select:focus {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 0 0 2px var(--primary-color-dark-light);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 640px) {
+    .filter-bar {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .filter-group {
+      width: 100%;
+    }
+    
+    .filter-group select {
+      width: 100%;
+    }
   }
   
   /* Status Badge Styles */
@@ -164,3 +218,409 @@
   .delete-btn:hover {
     background-color: rgba(229, 62, 62, 0.1);
   }
+
+/* Todo Form Styles */
+.todo-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.todo-form-container {
+  background-color: var(--bg-primary);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s ease-out;
+  transform-origin: center;
+}
+
+.todo-form-container.success {
+  animation: successPulse 0.5s ease-out;
+}
+
+.success-content {
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.todo-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.todo-form-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.todo-form {
+  padding: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+  animation: fadeIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+.form-group:nth-child(5) { animation-delay: 0.5s; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-light);
+}
+
+.form-input.error {
+  border-color: #e53e3e;
+}
+
+.form-input.error:focus {
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2);
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-color-dark);
+}
+
+.btn-secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-secondary-dark);
+}
+
+/* Dark mode styles */
+.dark .todo-form-container {
+  background-color: var(--bg-primary-dark);
+  border-color: var(--border-color-dark);
+}
+
+.dark .todo-form-header {
+  border-color: var(--border-color-dark);
+}
+
+.dark .form-input {
+  background-color: var(--bg-secondary-dark);
+  border-color: var(--border-color-dark);
+  color: var(--text-primary-dark);
+}
+
+.dark .form-input:focus {
+  border-color: var(--primary-color-dark);
+  box-shadow: 0 0 0 2px var(--primary-color-dark-light);
+}
+
+.dark .btn-secondary {
+  background-color: var(--bg-secondary-dark);
+  border-color: var(--border-color-dark);
+  color: var(--text-primary-dark);
+}
+
+.dark .btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-secondary-darker);
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .todo-form-container {
+    margin: 0;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* DatePicker custom styles */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.dark .react-datepicker__input-container input {
+  background-color: var(--bg-secondary-dark);
+  border-color: var(--border-color-dark);
+  color: var(--text-primary-dark);
+}
+
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark .react-datepicker {
+  background-color: var(--bg-primary-dark);
+  border-color: var(--border-color-dark);
+}
+
+.react-datepicker__header {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.dark .react-datepicker__header {
+  background-color: var(--bg-secondary-dark);
+  border-color: var(--border-color-dark);
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: var(--text-primary);
+}
+
+.dark .react-datepicker__current-month,
+.dark .react-datepicker__day-name {
+  color: var(--text-primary-dark);
+}
+
+.react-datepicker__day {
+  color: var(--text-primary);
+}
+
+.dark .react-datepicker__day {
+  color: var(--text-primary-dark);
+}
+
+.react-datepicker__day:hover {
+  background-color: var(--primary-color-light);
+  color: white;
+}
+
+.dark .react-datepicker__day:hover {
+  background-color: var(--primary-color-dark-light);
+}
+
+.react-datepicker__day--selected {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.dark .react-datepicker__day--selected {
+  background-color: var(--primary-color-dark) !important;
+}
+
+/* Anime Quote Styles */
+.anime-quote {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: quoteAppear 0.6s ease-out;
+}
+
+.quote-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.quote-attribution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.character {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.anime {
+  font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes quoteAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form field animations */
+.form-group {
+  animation: fadeIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+.form-group:nth-child(5) { animation-delay: 0.5s; }
+
+/* Dark mode styles */
+.dark .todo-form-overlay {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+}
+
+.dark .anime-quote {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+}

@@ -1,46 +1,58 @@
-import React, { useContext } from 'react';
-import { TodoContext } from '../contexts/TodoContext';
+import React from 'react';
+import useTodos from '../hooks/useTodos';
 
 const FilterBar = () => {
-  const { filters, setFilters } = useContext(TodoContext);
+  const { filters, setFilters } = useTodos();
+
+  const handleFilterChange = (type, value) => {
+    setFilters(prev => ({
+      ...prev,
+      [type]: value
+    }));
+  };
 
   return (
     <div className="filter-bar">
       <div className="filter-group">
-        <label>Status:</label>
+        <label htmlFor="status-filter">Status:</label>
         <select
+          id="status-filter"
           value={filters.status}
-          onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+          onChange={(e) => handleFilterChange('status', e.target.value)}
         >
           <option value="">All</option>
-          <option value="todo">To Do</option>
-          <option value="in-progress">In Progress</option>
+          <option value="pending">Pending</option>
+          <option value="in_progress">In Progress</option>
           <option value="completed">Completed</option>
         </select>
       </div>
 
       <div className="filter-group">
-        <label>Priority:</label>
+        <label htmlFor="priority-filter">Priority:</label>
         <select
+          id="priority-filter"
           value={filters.priority}
-          onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
+          onChange={(e) => handleFilterChange('priority', e.target.value)}
         >
           <option value="">All</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
+          <option value="critical">Critical</option>
         </select>
       </div>
 
       <div className="filter-group">
-        <label>Sort By:</label>
+        <label htmlFor="sort-filter">Sort by:</label>
         <select
+          id="sort-filter"
           value={filters.sort}
-          onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
+          onChange={(e) => handleFilterChange('sort', e.target.value)}
         >
           <option value="dueDate">Due Date</option>
           <option value="priority">Priority</option>
           <option value="createdAt">Created Date</option>
+          <option value="title">Title</option>
         </select>
       </div>
     </div>
