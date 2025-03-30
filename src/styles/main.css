@@ -119,21 +119,37 @@
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
   }
   
-  .status-badge.todo {
+  .status-badge-todo {
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
   }
   
-  .status-badge.in-progress {
+  .status-badge-in-progress {
     background-color: #e1dfdd;
     color: var(--text-secondary);
   }
   
-  .status-badge.completed {
+  .status-badge-completed {
     background-color: #e1dfdd;
     color: var(--text-secondary);
+  }
+  
+  /* Dark mode styles */
+  .dark .status-badge-todo {
+    background-color: var(--bg-secondary-dark);
+    color: var(--text-secondary-dark);
+  }
+  
+  .dark .status-badge-in-progress,
+  .dark .status-badge-completed {
+    background-color: var(--bg-secondary-dark-hover);
+    color: var(--text-secondary-dark);
   }
   
   /* Loading Spinner Styles */
@@ -639,6 +655,8 @@
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
 }
 
 .header-content {
@@ -647,6 +665,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 /* Logo Styles */
@@ -656,6 +675,8 @@
   gap: 0.75rem;
   text-decoration: none;
   transition: transform 0.2s ease;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 .logo:hover {
@@ -663,9 +684,12 @@
 }
 
 .logo-icon {
-  font-size: 2rem;
   color: var(--primary-color);
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .logo:hover .logo-icon {
@@ -675,19 +699,18 @@
 .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--primary-color);
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px var(--shadow-color);
+  white-space: nowrap;
 }
 
 /* Dark mode styles */
+.dark .logo-icon {
+  color: var(--primary-color-dark);
+}
+
 .dark .logo-text {
-  background: linear-gradient(135deg, var(--primary-color-dark), var(--primary-color-dark-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary-color-dark);
 }
 
 /* Responsive styles */

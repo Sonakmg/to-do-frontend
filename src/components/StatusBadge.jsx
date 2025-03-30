@@ -1,15 +1,19 @@
 import React from 'react';
-const StatusBadge = ({ status }) => {
-    const statusMap = {
-      'todo': { label: 'TODO', color: 'bg-gray-100 text-gray-800' },
-      'in-progress': { label: 'IN PROGRESS', color: 'bg-blue-100 text-blue-800' },
-      'completed': { label: 'COMPLETED', color: 'bg-green-100 text-green-800' }
-    };
-  
-    return (
-      <span className={`status-badge ${statusMap[status].color} px-2 py-1 rounded-full text-xs font-semibold`}>
-        {statusMap[status].label}
-      </span>
-    );
+
+const StatusBadge = ({ status = 'todo' }) => {
+  const statusMap = {
+    'todo': { label: 'TODO', className: 'status-badge-todo' },
+    'in-progress': { label: 'IN PROGRESS', className: 'status-badge-in-progress' },
+    'completed': { label: 'COMPLETED', className: 'status-badge-completed' }
   };
+
+  const statusInfo = statusMap[status] || statusMap['todo'];
+
+  return (
+    <span className={`status-badge ${statusInfo.className}`}>
+      {statusInfo.label}
+    </span>
+  );
+};
+
 export default StatusBadge;
